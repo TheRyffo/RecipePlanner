@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-ingredients
+      author: recipeplanner
+      changes:
+        - createTable:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: unit
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: calories_per_unit
+                  type: DECIMAL(8,2)

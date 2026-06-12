@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: recipeplanner
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/recipeplanner
+    username: postgres
+    password: 06022006
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+
+  security:
+    filter:
+      order: 10
+
+logging:
+  level:
+    root: INFO
+    com.example.recipeplanner: DEBUG
+    org.springframework.security: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/recipeplanner.log
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,loggers,httptrace,env
+  endpoint:
+    health:
+      show-details: when-authorized
+
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  expiration: 86400000  # 24 hours in milliseconds
+
+server:
+  port: 8080
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html

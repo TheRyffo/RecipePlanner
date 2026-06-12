@@ -1,0 +1,83 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-insert-roles
+      author: recipeplanner
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: name
+                  value: ROLE_USER
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: name
+                  value: ROLE_ADMIN
+
+  - changeSet:
+      id: 008-insert-admin-user
+      author: recipeplanner
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: admin
+              - column:
+                  name: email
+                  value: admin@recipeplanner.com
+              # BCrypt of "admin123"
+              - column:
+                  name: password
+                  value: $2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
+              - column:
+                  name: enabled
+                  value: true
+
+  - changeSet:
+      id: 008-assign-admin-role
+      author: recipeplanner
+      changes:
+        - sql:
+            sql: >
+              INSERT INTO user_roles (user_id, role_id)
+              SELECT u.id, r.id FROM users u, roles r
+              WHERE u.username = 'admin' AND r.name IN ('ROLE_USER', 'ROLE_ADMIN')
+
+  - changeSet:
+      id: 008-insert-sample-ingredients
+      author: recipeplanner
+      changes:
+        - insert:
+            tableName: ingredients
+            columns:
+              - column: {name: name, value: "Chicken breast"}
+              - column: {name: unit, value: "g"}
+              - column: {name: calories_per_unit, value: 1.65}
+        - insert:
+            tableName: ingredients
+            columns:
+              - column: {name: name, value: "Olive oil"}
+              - column: {name: unit, value: "ml"}
+              - column: {name: calories_per_unit, value: 8.84}
+        - insert:
+            tableName: ingredients
+            columns:
+              - column: {name: name, value: "Garlic"}
+              - column: {name: unit, value: "cloves"}
+              - column: {name: calories_per_unit, value: 4.02}
+        - insert:
+            tableName: ingredients
+            columns:
+              - column: {name: name, value: "Pasta"}
+              - column: {name: unit, value: "g"}
+              - column: {name: calories_per_unit, value: 3.71}
+        - insert:
+            tableName: ingredients
+            columns:
+              - column: {name: name, value: "Tomato"}
+              - column: {name: unit, value: "g"}
+              - column: {name: calories_per_unit, value: 0.18}

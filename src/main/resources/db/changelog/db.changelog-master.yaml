@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/001-create-roles-users.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/002-create-categories.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/003-create-ingredients.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/004-create-recipes.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/005-create-recipe-ingredients.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/006-create-meal-plans.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/007-create-shopping-lists.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/008-insert-initial-data.yaml
+      relativeToChangelogFile: false
